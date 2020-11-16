@@ -1,0 +1,23 @@
+git操作
+
+git status    查看git当前分支状态
+git log --graph    查看分支结构图
+git checkout -b 'cc'      创建并切换分支
+git add  文件名         将文件添加到暂存区
+git commit -m '提交描述'      将暂存区的文件提交
+git log              查看当前分支提交日志             执行后仿佛进入vi中，按q退出
+git merge  master 分支     合并分支到主分支
+git diff          显示提交、提交和工作树之间的变化
+git switch -c 分支名      创建并切换分支
+git stash  将隐藏未完成的任务，，等待后续恢复继续完成
+git stash lis   显示隐藏的工作现场
+git stash pop     恢复隐藏的工作现场并删除stash
+git cherry-pick  所要复制的部分任务的commit            在分支上做复制小部分修改操作
+git branch -d  <name>      删除分支
+git branch -D <name>      强行删除分支
+git push origin 分支名    将本地分支推送至远程分支
+git clone   远程库地址       克隆远程库
+git pull      从远程库拉取
+git checkout -b branch-name origin/branch-name          在本地创建和远程分支对应的分支
+git tag       查看标签
+git tag v1.0       设置标签
