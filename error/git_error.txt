@@ -1,0 +1,9 @@
+ 
+往github  push报以下错误：
+! [rejected]        master -> master (non-fast-forward)
+ error: failed to push some refs to 'github.com:ghw980514/The-accumulation-of-python.git' 
+hint: Updates were rejected because the tip of your current branch is behind hint: its remote counterpart. In
+
+解决：
+git pull origin master --allow-unrelated-histories   使用此命令消除本地库和远程库之间的差异即可
+
