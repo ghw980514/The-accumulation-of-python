@@ -19,7 +19,7 @@ logger.info("If you're using Python {}, prefer {feature} of course!", 3.6, featu
 #     2020-11-19 14:49:06.550 | DEBUG    | __main__:<module>:13 - That's it, beautiful and simple logging!
 #        时间|日志级别|模块名（即哪个类中）：行号 - 日志信息
 # logger是调度日志消息构造程序的接口，并且有且只有这么一个对象
-#  ---------------------------------------------------------------------------------------------------------------------
+#  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # 输出到文件中
 # logger.add('D:/runtime.log')     #添加日志文件存储路径
 
@@ -42,10 +42,33 @@ logger.info("If you're using Python {}, prefer {feature} of course!", 3.6, featu
 # logger.remove()                                         会将addid的的任务删除掉，，不会继续下面的日志存储，可以实现日志的刷新重新写入操作
 
 
-td = logger.add('D:/runtime.log', format="<green>{time}</green> {level} {message} ,{module}",level="DEBUG",enqueue=True,retention=' 1 week',rotation="500 MB",compression='zip')
-logger.debug('this is cool logging')
-logger.info('this is amaz logging')
-logger.warning('this is amaz logging')
-logger.error('this is amaz logging')
-logger.remove(td)
-logger.critical('this is amaz logging')
+# td = logger.add('D:/testlog/runtime_{time}.log', format="<green>{time}</green> {level} {message} ,{module}",level="DEBUG",enqueue=True,retention=' 1 week',rotation="500 MB",compression='zip')
+# logger.debug('this is debug logging')
+# logger.info('this is info logging')
+# logger.warning('this is warning logging')
+# logger.error('this is error logging')
+# logger.remove(td)
+# logger.critical('this is critical logging')
+#  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# 异常捕获
+# Loguru允许显示整个堆栈跟踪，包括变量的值（使用了better-exceptions）
+#  添加参数 backtrace=True 和 diagnose=True
+# logger.add('D:/testlog/runtime_{time}.log',backtrace=True,diagnose=True)
+# @logger.catch
+# # 可以直接显示参数传入后在方法什么地方出错 在日志信息中，不仅指明了异常出现的地方，而且把参数的值也记录下来了
+# def tou(q,w,e):
+#     return q+w+e
+#
+# if __name__ == '__main__':
+#     print(tou(0,'1',1))
+#  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# 结构化日志
+# 保存为JSON格式，添加参数 serialize=True
+# 日志错误会以json的形式保存进文件中
+logger.add('D:/testlog/runtime_{time}.log',serialize=True)
+@logger.catch
+def tou(q,w,e):
+    return q+w+e
+
+if __name__ == '__main__':
+    print(tou(0,'1',1))
