@@ -27,3 +27,7 @@ windows：
 
     下载和elasticsearcch同版本的kibana 解压后 在bin文件中执行kibana.bat文件
     如果es的端口变化，还需设置config/kibana.yml   将elasticsearch.hosts: ["http://localhost:9200"]这一项进行更改
+
+
+安装ki分词器
+   下载对应版本的ik分词器，解压，在es路径下创建plugins\analysis-ik文件夹，将解压的文件全部复制在该文件夹下，重新启动es
