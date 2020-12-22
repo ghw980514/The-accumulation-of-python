@@ -12,7 +12,7 @@ installation : python3.7+可用
 # task 任务：一个协程对象就是一个原生可以挂起的函数，任务则是对协程进一步封装，其中包含任务的各种状态。
 # future： 代表将来执行或没有执行的任务的结果。它和task上没有本质的区别
 # async/await 关键字：python3.5 用于定义协程的关键字，async定义一个协程，await用于挂起阻塞的异步调用接口。
-
+# 程序在遇到阻塞操作时，会自动先去处理其他操作，等阻塞操作完成后，在通知cpu来处理阻塞操作
 
 import asyncio
 import time
@@ -92,22 +92,70 @@ import time
 
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-now = lambda: time.time()
-
-async def do_some_work(x):
-    print('Waiting: ', x)
-    await asyncio.sleep(x)
-    return 'Done after {}s'.format(x)
-
-start = now()
-
-coroutine = do_some_work(2)
-loop = asyncio.get_event_loop()
-task = asyncio.ensure_future(coroutine)
-loop.run_until_complete(task)
-
-print('Task ret: ', task.result())
-print('TIME: ', now() - start)
+# now = lambda: time.time()
+#
+# async def do_some_work(x):
+#     print('Waiting: ', x)
+#     await asyncio.sleep(x)
+#     return 'Done after {}s'.format(x)
+#
+# start = now()
+#
+# coroutine = do_some_work(2)
+# loop = asyncio.get_event_loop()
+# task = asyncio.ensure_future(coroutine)
+# loop.run_until_complete(task)
+#
+# print('Task ret: ', task.result())
+# print('TIME: ', now() - start)
 
 
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+async def wget(host):
+    print('wget %s...' % host)
+    connect = asyncio.open_connection(host, 80)
+    # 建立tcp连接
+    reader, writer = await connect
+    # reader用于读取连接数据
+    # writer用于给服务器写信息
+    header = 'GET / HTTP/1.0\r\nHost: %s\r\n\r\n' % host
+    writer.write(header.encode('utf-8'))
+    # 准备向服务器发送的数据
+    await writer.drain()
+    # 向服务器发送数据，如果数据量大，可能会造成阻塞操作
+    while True:
+        line = await reader.readline()
+        # 接收服务器返回的数据，
+        if line == b'\r\n':
+            break
+        print('%s header > %s' % (host, line.decode('utf-8').rstrip()))
+    # Ignore the body, close the socket
+    writer.close()
+
+loop = asyncio.get_event_loop()
+tasks = [wget(host) for host in ['www.sina.com.cn', 'www.sohu.com', 'www.163.com']]
+loop.run_until_complete(asyncio.wait(tasks))
+loop.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
