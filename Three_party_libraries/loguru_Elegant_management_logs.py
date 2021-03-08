@@ -14,7 +14,10 @@ import time
 from loguru import logger
 
 logger.error("That's it, beautiful and simple logging!")
-logger.info("If you're using Python {}, prefer {feature} of course!", 3.6, feature="f-strings")
+logger.info(
+    "If you're using Python {}, prefer {feature} of course!",
+    3.6,
+    feature="f-strings")
 # return:
 #     2020-11-19 14:49:06.550 | DEBUG    | __main__:<module>:13 - That's it, beautiful and simple logging!
 #        时间|日志级别|模块名（即哪个类中）：行号 - 日志信息
@@ -39,7 +42,8 @@ logger.info("If you're using Python {}, prefer {feature} of course!", 3.6, featu
 # )
 
 # format
-# logger.remove()                                         会将addid的的任务删除掉，，不会继续下面的日志存储，可以实现日志的刷新重新写入操作
+# logger.remove()
+# 会将addid的的任务删除掉，，不会继续下面的日志存储，可以实现日志的刷新重新写入操作
 
 
 # td = logger.add('D:/testlog/runtime_{time}.log', format="<green>{time}</green> {level} {message} ,{module}",level="DEBUG",enqueue=True,retention=' 1 week',rotation="500 MB",compression='zip')
@@ -65,10 +69,13 @@ logger.info("If you're using Python {}, prefer {feature} of course!", 3.6, featu
 # 结构化日志
 # 保存为JSON格式，添加参数 serialize=True
 # 日志错误会以json的形式保存进文件中
-logger.add('D:/testlog/runtime_{time}.log',serialize=True)
+logger.add('D:/testlog/runtime_{time}.log', serialize=True)
+
+
 @logger.catch
-def tou(q,w,e):
-    return q+w+e
+def tou(q, w, e):
+    return q + w + e
+
 
 if __name__ == '__main__':
-    print(tou(0,'1',1))
+    print(tou(0, '1', 1))

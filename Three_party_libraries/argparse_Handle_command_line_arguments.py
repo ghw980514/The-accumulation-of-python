@@ -22,10 +22,10 @@ installation : python标准库自带
 # print(asse.echo**3)
 
 # return:
-    # D:\accumulation_python\Three_party_libraries>python3 argparse_Handle_command_line_arguments.py 4
-    # Namespace(echo=4)
-    # 4
-    #64
+# D:\accumulation_python\Three_party_libraries>python3 argparse_Handle_command_line_arguments.py 4
+# Namespace(echo=4)
+# 4
+# 64
 
 # 各方法参数和使用  ArgumentParser()
 # prog = None - 程序名
@@ -41,8 +41,6 @@ installation : python标准库自带
 # add_help = True - 是否增加 - h / --help选项，默认是True)
 
 
-
-
 # add_argument()
 # type    规定传入的选项类型,默认为字符串类型，例：type=int
 # action
@@ -51,17 +49,17 @@ installation : python标准库自带
 # choices：参数值只能从几个选项里面选择     例：choices=['alexnet', 'vgg']  参数只能从这两个中选一个，填别的会报错
 # help：指定参数的说明信息     ，有时候执行者，不知道参数是什么含义，可以在这里表明
 # nargs： 设置参数在使用可以提供的个数    例：.add_argument('-name', required=True, nargs='+')
-    # 值  含义
-    # N   参数的绝对个数（例如：3）
-    # '?'   0或1个参数
-    # '*'   0或所有参数
-    # '+'   所有，并且至少一个参数
+# 值  含义
+# N   参数的绝对个数（例如：3）
+# '?'   0或1个参数
+# '*'   0或所有参数
+# '+'   所有，并且至少一个参数
 # dest：设置参数在代码中的变量名，argparse默认的变量名是--或-后面的字符串，但是你也可以通过dest=xxx来设置参数的变量名，然后在代码中用args.xxx来获取参数的值。
 
 # 传入可选参数
 import argparse
 parserone = argparse.ArgumentParser()
-parserone.add_argument('--verberition',help='verberition  ouput')
+parserone.add_argument('--verberition', help='verberition  ouput')
 assee = parserone.parse_args()
 if assee.verberition:
     print('verberition retu,on')
